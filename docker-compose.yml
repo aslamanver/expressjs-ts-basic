@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+  webapp:
+    # build: ./
+    # restart: always
+    image: node:10
+    working_dir: /usr/src/app
+    container_name: node-container
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "3000:3000"
+    command: /usr/src/app/start.sh
+    links:
+      - mongo
+  mongo:
+    container_name: mongo-container
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - "27017:27017"
+    logging:
+      driver: none
+
+# use mydb
+# db.createUser({ user: "user", pwd: "password", roles: [ { role: "readWrite", db: "mydb" } ], passwordDigestor : "server" })
