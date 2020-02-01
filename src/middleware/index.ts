@@ -1,5 +1,5 @@
 import express = require('express')
-import { LOGGER } from '../utils/logger'
+import { LOGGER, LogColors } from '../utils/logger'
 
 export const set_middleware = (app: express.Application) => {
 
@@ -16,6 +16,7 @@ export const set_middleware = (app: express.Application) => {
             body = req.body
         }
 
+        LOGGER.info('')
         LOGGER.info(`Middleware checkpoint`)
         LOGGER.info(`URL: ${req.originalUrl}`)
         LOGGER.info(`Query: ${JSON.stringify(query)}`)

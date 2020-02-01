@@ -1,9 +1,8 @@
 import express = require('express')
-import bodyParser = require('body-parser')
-
 import { set_middleware } from '../middleware'
-import { api_routes } from '../routes'
 import { db } from '../database'
+import { set_routes } from '../routes'
+import { error_handler } from '../error/error.handler'
 
 const app = express()
 
@@ -20,7 +19,10 @@ db.connect()
 set_middleware(app)
 
 // API routes
-api_routes(app)
+set_routes(app)
+
+// Error handler
+error_handler(app)
 
 export const eapp = () => {
     return app

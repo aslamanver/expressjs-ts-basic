@@ -1,13 +1,13 @@
 import express = require('express')
-import { HTTP_API } from '../http';
+import { static_routes } from './static.route';
+import { api_routes } from './api.route';
 
+export const set_routes = (app: express.Application) => {
 
-export const api_routes = (app: express.Application) => {
+    // API routes
+    api_routes(app);
 
-    app.get('/', function (req, res) {
-        res.render('index', { title: 'Hey', message: 'Hello there !' })
-    })
-
-    app.get('/health_check_get', (req, res) => HTTP_API.health_check_get(req, res));
-    app.post('/health_check_post', (req, res) => HTTP_API.health_check_post(req, res));
+    // Routes for HTML Files
+    static_routes(app)
+    
 }
