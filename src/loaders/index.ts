@@ -4,15 +4,22 @@ import { db } from '../database'
 import { set_routes } from '../routes'
 import { error_handler } from '../error/error.handler'
 
+// SRC directory
+const SRC_DIR = __dirname + '/../'
+
+// Express App
 const app = express()
 
 // Body
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+// Static files
+app.use(express.static(SRC_DIR + 'public'))
+
 // Pug template engine
 app.set('view engine', 'pug')
-app.set('views', __dirname + '/../views')
+app.set('views', SRC_DIR + 'views')
 
 db.connect()
 

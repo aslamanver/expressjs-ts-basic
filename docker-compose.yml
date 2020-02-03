@@ -1,9 +1,7 @@
 version: "3.7"
 services:
   webapp:
-    # build: ./
-    # restart: always
-    image: node:10
+    build: ./docker/node
     working_dir: /usr/src/app
     container_name: node-container
     volumes:
@@ -14,8 +12,8 @@ services:
     links:
       - mongo
   mongo:
+    build: ./docker/mongo
     container_name: mongo-container
-    image: mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: password
